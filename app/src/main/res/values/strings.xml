@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Kotlin Contacts</string>
+    <string name="my_contacts">My Contacts</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="details">Details</string>
+    <string name="call">Call</string>
+    <string name="name_sample">Jose Ricardo Citerio</string>
+    <string name="phone_sample">00584244150064</string>
+    <string name="email_sample">r1c4rd0.10100@gmail.com</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="new_contact">New contact</string>
+    <string name="no_contacts">No contacts yet</string>
+    <string name="error_empty_field">Please fill out this field</string>
+</resources>
