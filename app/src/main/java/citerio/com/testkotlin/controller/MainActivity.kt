@@ -1,36 +1,41 @@
 package citerio.com.testkotlin.controller
 
-import android.content.*
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import android.support.v7.widget.RecyclerView
-import android.widget.TextView
-import citerio.com.testkotlin.R
-import kotlinx.android.synthetic.main.activity_main.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.AsyncTask
-import android.support.design.widget.FloatingActionButton
-import android.support.v7.widget.LinearLayoutManager
+import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import citerio.com.testkotlin.R
 import citerio.com.testkotlin.model.Contact
 import citerio.com.testkotlin.model.ContactAdapter
 import citerio.com.testkotlin.model.Contact_
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
 import io.objectbox.query.Query
-import java.util.ArrayList
-
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
     /*****************************variables*****************************/
 
-    private var contacts_list_ : RecyclerView? = null
+    private var contacts_list_ : androidx.recyclerview.widget.RecyclerView? = null
     private var no_contacts_: TextView? = null
-    private var toolbar_ : android.support.v7.widget.Toolbar? = null
+    private var toolbar_ : androidx.appcompat.widget.Toolbar? = null
     private var add_contact_button_ : FloatingActionButton? = null
-    private var mLayoutManager: RecyclerView.LayoutManager? = null
+    private var mLayoutManager: androidx.recyclerview.widget.RecyclerView.LayoutManager? = null
     private lateinit var contactBox: Box<Contact>
     private lateinit var contactQuery: Query<Contact>
     private var contactReceiver: ContactBroadCastReceiver? = null
@@ -52,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         add_contact_button_ = this.add_contact_button
         contactReceiver = ContactBroadCastReceiver()
 
-        mLayoutManager = LinearLayoutManager(applicationContext)
+        mLayoutManager = androidx.recyclerview.widget.LinearLayoutManager(applicationContext)
         contacts_list_?.layoutManager = mLayoutManager
 
         add_contact_button_!!.setOnClickListener(object : View.OnClickListener {
@@ -75,12 +80,12 @@ class MainActivity : AppCompatActivity() {
     /*****************************showing contacts from db*****************************/
     fun show_contacts(){
 
-        object : AsyncTask<RecyclerView, Void, ContactAdapter>() {
+        object : AsyncTask<androidx.recyclerview.widget.RecyclerView, Void, ContactAdapter>() {
 
 
-            private var v: RecyclerView? = null
+            private var v: androidx.recyclerview.widget.RecyclerView? = null
 
-            override fun doInBackground(vararg params: RecyclerView): ContactAdapter? {
+            override fun doInBackground(vararg params: androidx.recyclerview.widget.RecyclerView): ContactAdapter? {
 
                 v = params[0]
 
@@ -149,5 +154,23 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         applicationContext.unregisterReceiver(contactReceiver)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val child =  View.inflate(this, com.citerio.avengerslib.R.layout.avenger_float_button, null) as ConstraintLayout
+        root.addView(child)
+        val set = ConstraintSet()
+        set.clone(root)
+        set.connect(child.id, ConstraintSet.BOTTOM, root.id, ConstraintSet.BOTTOM)
+        set.connect(child.id, ConstraintSet.TOP, root.id, ConstraintSet.TOP)
+        set.connect(child.id, ConstraintSet.END, root.id, ConstraintSet.END)
+        //set.connect(child.id, ConstraintSet.START, root.id, ConstraintSet.START)
+        set.applyTo(root)
+
+
+        child.findViewById<FloatingActionButton>(com.citerio.avengerslib.R.id.open_popup_button).setOnClickListener {
+            com.citerio.avengerslib.Notifications.showPopUp(this@MainActivity)
+        }
     }
 }

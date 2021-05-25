@@ -1,1 +1,4 @@
 include ':app'
+
+include ':AvengersLib'
+project(':AvengersLib').projectDir = new File('../AvengersLib/App/')

@@ -1,7 +1,7 @@
 package citerio.com.testkotlin.model
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import citerio.com.testkotlin.R
 /**
  * Created by Jose Ricardo on 17/09/2016.
  */
-class ContactAdapter(private val nContext: Context, contacts: ArrayList<Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+class ContactAdapter(private val nContext: Context, contacts: ArrayList<Contact>) : androidx.recyclerview.widget.RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
     private var contacts: ArrayList<Contact>
 
@@ -65,7 +65,7 @@ class ContactAdapter(private val nContext: Context, contacts: ArrayList<Contact>
     }*/
 
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         val name: TextView
         val email: TextView

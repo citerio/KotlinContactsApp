@@ -1,9 +1,9 @@
 package citerio.com.testkotlin.controller
 
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout
 import android.widget.Button
 import android.widget.EditText
 import citerio.com.testkotlin.R
@@ -38,7 +38,7 @@ class Create_Contact : AppCompatActivity() {
     private var address_layout_ : TextInputLayout? = null
     private var cancel_button_ : Button? = null
     private var add_button_ : Button? = null
-    private var toolbar_ : android.support.v7.widget.Toolbar? = null
+    private var toolbar_ : androidx.appcompat.widget.Toolbar? = null
     private lateinit var contactBox: Box<Contact>
     private val TAG = "KotlinTestApp"
     private val ACTION = "citerio.com.testkotlin"
